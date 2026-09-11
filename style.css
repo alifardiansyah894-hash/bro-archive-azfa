@@ -1,0 +1,660 @@
+/* ============================
+   THE BRO ARCHIVE — style.css
+   ============================ */
+
+/* Default theme values (fallback sebelum engine.js jalan) */
+:root {
+  --primary: #1E6FEB;
+  --secondary: #FF8A3D;
+  --background: #03060D;
+  --text: #EAF2FF;
+  --glow: rgba(30, 111, 235, 0.55);
+}
+
+/* Reset dasar — penting supaya tidak ada horizontal overflow di HP */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--text);
+  font-family: 'Courier New', monospace; /* nanti bisa diganti font futuristik */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  position: relative;
+}
+
+/* ============================
+   STARFIELD CANVAS
+   ============================ */
+#starfield-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  display: block;
+}
+
+/* ============================
+   BOOT SCREEN
+   ============================ */
+
+.boot-screen {
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+}
+
+.boot-title {
+  font-size: 1.6rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  text-shadow: 0 0 12px var(--glow);
+}
+
+.boot-status {
+  margin-top: 18px;
+  min-height: 1.2em;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  color: var(--primary);
+}
+
+.boot-progress-track {
+  width: 100%;
+  height: 6px;
+  margin-top: 18px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.boot-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--primary);
+  box-shadow: 0 0 10px var(--glow);
+  transition: width 0.35s ease;
+}
+
+.boot-identity {
+  margin-top: 26px;
+  display: none;
+}
+
+.boot-identity.visible {
+  display: block;
+  animation: fadeIn 0.6s ease;
+}
+
+.boot-identity .archive-id {
+  margin-top: 6px;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  color: var(--secondary);
+}
+
+.enter-btn {
+  margin-top: 26px;
+  padding: 12px 26px;
+  background: transparent;
+  border: 1px solid var(--primary);
+  border-radius: 6px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: none;
+}
+
+.enter-btn.visible {
+  display: inline-block;
+  animation: fadeIn 0.6s ease;
+}
+
+.enter-btn:active {
+  background: var(--primary);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+  .guest-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--primary, #1E6FEB);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 20px;
+    animation: fadeIn 0.6s ease forwards;
+    opacity: 0;
+}
+
+.guest-photo {
+    width: 100%;
+    max-width: 220px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+    margin: 0 auto 12px auto;
+}
+
+.guest-name {
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.guest-origin {
+    font-size: 0.85rem;
+    text-align: center;
+    opacity: 0.7;
+    margin-bottom: 10px;
+}
+
+.guest-message {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+}
+
+/* ============================
+   DASHBOARD
+   ============================ */
+
+.dashboard {
+  display: none;
+  width: 100%;
+  max-width: 440px;
+  padding: 8px 4px;
+}
+
+.dashboard.visible {
+  display: block;
+}
+
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 26px;
+}
+
+.dashboard-title {
+  font-size: 1.05rem;
+  letter-spacing: 3px;
+  text-shadow: 0 0 10px var(--glow);
+}
+
+.dashboard-subtitle {
+  margin-top: 6px;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  color: var(--secondary);
+}
+
+.menu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.78rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-align: left;
+
+  opacity: 0;
+  transform: translateY(8px);
+  animation: menuItemIn 0.45s ease forwards;
+}
+
+.menu-item:active {
+  border-color: var(--primary);
+  box-shadow: 0 0 12px var(--glow);
+}
+
+.menu-item .menu-icon {
+  width: 14px;
+  height: 14px;
+  color: var(--primary);
+  flex-shrink: 0;
+  margin-left: 10px;
+}
+
+@keyframes menuItemIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================
+   SECTION VIEW (placeholder)
+   ============================ */
+
+.section-view {
+  display: none;
+  width: 100%;
+  max-width: 440px;
+  padding: 8px 4px;
+}
+
+.section-view.visible {
+  display: block;
+  animation: fadeIn 0.4s ease;
+}
+
+.back-btn {
+  background: transparent;
+  border: 1px solid var(--primary);
+  color: var(--text);
+  padding: 9px 16px;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+
+.back-btn:active {
+  background: var(--primary);
+}
+
+.section-title {
+  font-size: 1rem;
+  letter-spacing: 3px;
+  text-shadow: 0 0 10px var(--glow);
+  margin-bottom: 16px;
+}
+
+.section-content {
+  font-size: 0.82rem;
+  line-height: 1.7;
+  letter-spacing: 0.5px;
+  color: var(--text);
+  opacity: 0.8;
+  white-space: pre-line;
+}
+
+/* ============================
+   PROFILE CONTENT
+   ============================ */
+
+.profile-card {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  padding: 6px 16px;
+  background: rgba(255, 255, 255, 0.02);
+  margin-bottom: 22px;
+}
+
+.profile-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+}
+
+.profile-row:last-child {
+  border-bottom: none;
+}
+
+.profile-key {
+  color: rgba(234, 242, 255, 0.55);
+  letter-spacing: 2px;
+}
+
+.profile-val {
+  color: var(--text);
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.profile-status {
+  color: var(--primary);
+  text-shadow: 0 0 8px var(--glow);
+  font-weight: bold;
+}
+
+.stats-block {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.stat-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.stat-label {
+  font-size: 0.68rem;
+  letter-spacing: 2px;
+  color: rgba(234, 242, 255, 0.7);
+}
+
+.stat-track {
+  width: 100%;
+  height: 6px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.stat-fill {
+  height: 100%;
+  background: var(--primary);
+  box-shadow: 0 0 8px var(--glow);
+  border-radius: 4px;
+}
+
+/* ============================
+   THOUGHT ARCHIVE
+   ============================ */
+
+.thought-card {
+  border-left: 2px solid var(--primary);
+  border-radius: 0 6px 6px 0;
+  background: rgba(255, 255, 255, 0.02);
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  font-size: 0.82rem;
+  line-height: 1.8;
+  font-style: italic;
+
+  opacity: 0;
+  transform: translateY(8px);
+  animation: menuItemIn 0.6s ease forwards;
+}
+
+/* ============================
+   FRIEND DATABASE
+   ============================ */
+
+.fact-display {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  margin-bottom: 18px;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.generate-btn {
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--primary);
+  color: var(--text);
+  padding: 13px 20px;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.generate-btn:active {
+  background: var(--primary);
+}
+
+/* ============================
+   SOUNDTRACK
+   ============================ */
+
+.track-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.track-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.track-row.active {
+  border-color: var(--primary);
+  box-shadow: 0 0 10px var(--glow);
+}
+
+.track-title {
+  font-size: 0.78rem;
+  letter-spacing: 1px;
+}
+
+.track-play-btn {
+  background: transparent;
+  border: 1px solid var(--primary);
+  color: var(--text);
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 0.68rem;
+  letter-spacing: 1px;
+}
+
+.track-play-btn:active {
+  background: var(--primary);
+}
+
+/* ============================
+   ACHIEVEMENTS
+   ============================ */
+
+.achievement-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.achievement-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
+
+  opacity: 0;
+  transform: translateY(8px);
+  animation: menuItemIn 0.5s ease forwards;
+}
+
+.achievement-badge {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--primary);
+  filter: drop-shadow(0 0 4px var(--glow));
+}
+
+.achievement-title {
+  font-size: 0.78rem;
+  letter-spacing: 1.5px;
+  margin-bottom: 5px;
+}
+
+.achievement-desc {
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: rgba(234, 242, 255, 0.6);
+}
+
+/* ============================
+   THE NEXT CHAPTER
+   ============================ */
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 26px;
+}
+
+.timeline-item {
+  text-align: center;
+  padding: 14px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  min-width: 180px;
+
+  opacity: 0;
+  transform: translateY(8px);
+  animation: menuItemIn 0.5s ease forwards;
+}
+
+.timeline-year {
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  color: var(--primary);
+  text-shadow: 0 0 8px var(--glow);
+}
+
+.timeline-label {
+  margin-top: 4px;
+  font-size: 0.72rem;
+  letter-spacing: 1.5px;
+  opacity: 0.85;
+}
+
+.timeline-sublabel {
+  margin-top: 6px;
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+  color: var(--secondary);
+}
+
+.timeline-connector {
+  width: 1px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.next-chapter-quote {
+  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.9;
+  font-style: italic;
+  letter-spacing: 1px;
+  text-shadow: 0 0 8px var(--glow);
+  margin-bottom: 20px;
+
+  opacity: 0;
+  animation: menuItemIn 0.6s ease forwards;
+}
+
+.next-chapter-note {
+  font-size: 0.78rem;
+  line-height: 1.7;
+  text-align: center;
+  color: rgba(234, 242, 255, 0.7);
+
+  opacity: 0;
+  animation: menuItemIn 0.6s ease forwards;
+}
+
+/* ============================
+   MESSAGE FROM GW
+   ============================ */
+
+.letter-card {
+  margin-bottom: 18px;
+}
+
+.letter-paragraph {
+  font-size: 0.83rem;
+  line-height: 1.8;
+  letter-spacing: 0.3px;
+  margin-bottom: 18px;
+
+  opacity: 0;
+  transform: translateY(8px);
+  animation: menuItemIn 0.7s ease forwards;
+}
+
+.letter-signature {
+  text-align: right;
+  font-size: 0.78rem;
+  letter-spacing: 2px;
+  font-style: italic;
+  color: var(--secondary);
+  margin-bottom: 24px;
+}
+
+.guest-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--primary, #1E6FEB);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 20px;
+    animation: fadeIn 0.6s ease forwards;
+    opacity: 0;
+}
+
+.guest-photo {
+    width: 100%;
+    max-width: 220px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+    margin: 0 auto 12px auto;
+}
+
+.guest-name {
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.guest-origin {
+    font-size: 0.85rem;
+    text-align: center;
+    opacity: 0.7;
+    margin-bottom: 10px;
+}
+
+.guest-message {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+  }
