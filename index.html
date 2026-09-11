@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>THE BRO ARCHIVE — AZFA</title>
+  <link rel="stylesheet" href="style.css" onerror="alert('GAGAL LOAD: style.css — cek nama file & lokasinya!')">
+</head>
+<body>
+
+  <canvas id="starfield-canvas"></canvas>
+
+  <audio id="bg-audio" loop></audio>
+
+  <div class="boot-screen">
+    <div class="boot-title">THE BRO ARCHIVE</div>
+
+    <div class="boot-status" id="boot-status">INITIALIZING...</div>
+
+    <div class="boot-progress-track">
+      <div class="boot-progress-fill" id="boot-progress-fill"></div>
+    </div>
+
+    <div class="boot-identity" id="boot-identity">
+      <div id="boot-name"></div>
+      <div id="boot-birthday"></div>
+      <div class="archive-id" id="boot-archiveid"></div>
+    </div>
+
+    <button class="enter-btn" id="enter-btn">ENTER ARCHIVE</button>
+  </div>
+
+  <div class="dashboard" id="dashboard">
+    <div class="dashboard-header">
+      <div class="dashboard-title" id="dashboard-title"></div>
+      <div class="dashboard-subtitle" id="dashboard-subtitle"></div>
+    </div>
+    <nav class="menu-list" id="menu-list"></nav>
+  </div>
+
+  <div class="section-view" id="section-view">
+    <button class="back-btn" id="back-btn">← BACK TO DASHBOARD</button>
+    <div class="section-title" id="section-title"></div>
+    <div class="section-content" id="section-content"></div>
+  </div>
+
+  <!-- Cuma 3 file total: azfa.html, style.css, script.js -->
+  <script src="script.js" onerror="alert('GAGAL LOAD: script.js — cek nama file & lokasinya!')"></script>
+
+</body>
+</html>
